@@ -1,5 +1,5 @@
 # List of demo programs
-DEMOS = bounce gravity pacman nbodies damping spaceinvaders breakout pegs game
+DEMOS = game
 # List of C files in "libraries" that we provide
 STAFF_LIBS = test_util sdl_wrapper
 # List of C files in "libraries" that you will write.
@@ -63,29 +63,6 @@ out/%.o: tests/%.c # or "tests"
 # Builds bin/bounce by linking the necessary .o files.
 # Unlike the out/%.o rule, this uses the LIBS flags and omits the -c flag,
 # since it is building a full executable.
-bin/bounce: out/bounce.o out/sdl_wrapper.o $(STUDENT_OBJS)
-	$(CC) $(CFLAGS) $(LIBS) $^ -o $@
-
-bin/gravity: out/gravity.o out/sdl_wrapper.o $(STUDENT_OBJS)
-	$(CC) $(CFLAGS) $(LIBS) $^ -o $@
-
-bin/pacman: out/pacman.o out/sdl_wrapper.o $(STUDENT_OBJS)
-	$(CC) $(CFLAGS) $(LIBS) $^ -o $@
-
-bin/nbodies: out/nbodies.o out/sdl_wrapper.o $(STUDENT_OBJS)
-	$(CC) $(CFLAGS) $(LIBS) $^ -o $@
-
-bin/damping: out/damping.o out/sdl_wrapper.o $(STUDENT_OBJS)
-		$(CC) $(CFLAGS) $(LIBS) $^ -o $@
-
-bin/spaceinvaders: out/spaceinvaders.o out/sdl_wrapper.o $(STUDENT_OBJS)
-		$(CC) $(CFLAGS) $(LIBS) $^ -o $@
-
-bin/breakout: out/breakout.o out/sdl_wrapper.o $(STUDENT_OBJS)
-		$(CC) $(CFLAGS) $(LIBS) $^ -o $@
-
-bin/pegs: out/pegs.o out/sdl_wrapper.o $(STUDENT_OBJS)
-		$(CC) $(CFLAGS) $(LIBS) $^ -o $@
 
 bin/game: out/game.o out/sdl_wrapper.o $(STUDENT_OBJS)
 		$(CC) $(CFLAGS) $(LIBS) $^ -o $@
@@ -214,29 +191,6 @@ out/%.obj: demo/%.c # or "demo"
 out/%.obj: tests/%.c # or "tests"
 	$(CC) -c $^ $(CFLAGS) -Fo"$@"
 
-bin/bounce.exe bin\bounce.exe: out/bounce.obj out/sdl_wrapper.obj $(STUDENT_OBJS)
-	$(CC) $^ $(CFLAGS) -link $(LINKEROPTS) $(LIBS) -out:"$@"
-
-bin/gravity.exe bin\gravity.exe: out/gravity.obj out/sdl_wrapper.obj $(STUDENT_OBJS)
-	$(CC) $^ $(CFLAGS) -link $(LINKEROPTS) $(LIBS) -out:"$@"
-
-bin/pacman.exe bin\pacman.exe: out/pacman.obj out/sdl_wrapper.obj $(STUDENT_OBJS)
-	$(CC) $^ $(CFLAGS) -link $(LINKEROPTS) $(LIBS) -out:"$@"
-
-bin/nbodies.exe: out/nbodies.obj out/sdl_wrapper.obj $(STUDENT_OBJS)
-	$(CC) $^ $(CFLAGS) -link $(LINKEROPTS) $(LIBS) -out:"$@"
-
-bin/damping.exe: out/damping.obj out/sdl_wrapper.obj $(STUDENT_OBJS)
-	$(CC) $^ $(CFLAGS) -link $(LINKEROPTS) $(LIBS) -out:"$@"
-
-bin/spaceinvaders.exe: out/spaceinvaders.obj out/sdl_wrapper.obj $(STUDENT_OBJS)
-	$(CC) $^ $(CFLAGS) -link $(LINKEROPTS) $(LIBS) -out:"$@"
-
-bin/breakout.exe: out/breakout.obj out/sdl_wrapper.obj $(STUDENT_OBJS)
-	$(CC) $^ $(CFLAGS) -link $(LINKEROPTS) $(LIBS) -out:"$@"
-
-bin/pegs.exe: out/pegs.obj out/sdl_wrapper.obj $(STUDENT_OBJS)
-	$(CC) $^ $(CFLAGS) -link $(LINKEROPTS) $(LIBS) -out:"$@"
 
 bin/game.exe: out/game.obj out/sdl_wrapper.obj $(STUDENT_OBJS)
 	$(CC) $^ $(CFLAGS) -link $(LINKEROPTS) $(LIBS) -out:"$@"
@@ -248,15 +202,6 @@ bin/test_suite_%.exe bin\test_suite_%.exe: out/test_suite_%.obj out/test_util.ob
 	$(CC) $^ $(CFLAGS) -link $(LINKEROPTS) -out:"$@"
 
 # Empty recipes for cross-OS task compatibility.
-bin/bounce bin\bounce: bin/bounce.exe ;
-bin/gravity bin\gravity: bin/gravity.exe ;
-bin/pacman bin\pacman: bin/pacman.exe ;
-bin/nbodies bin\nbodies: bin/nbodies.exe; 
-bin/damping bin\damping: bin/damping.exe; 
-bin/spaceinvaders bin\spaceinvaders: bin/spaceinvaders.exe
-bin/breakout bin\breakout: bin/breakout.exe
-bin/pegs bin\pegs: bin/pegs.exe
-bin/pegs bin\pegs: bin/game.exe
 bin/test_suite_% bin\test_suite_%: bin/test_suite_%.exe ;
 
 # CMD commands to test and clean
